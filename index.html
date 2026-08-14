@@ -1,1329 +1,863 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Faciamus Intelligence | Consultoria, Gestão e Tecnologia</title>
-  <meta name="description" content="Consultoria empresarial, sistemas de gestão, PDV mobile, automações, emissão fiscal e desenvolvimento de soluções sob medida para pequenas e médias empresas." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --navy:#06163f;
-      --navy-2:#0a2166;
-      --blue:#0066ff;
-      --cyan:#3aa3ff;
-      --indigo:#2946e0;
-      --bg:#f6f9ff;
-      --tint:#eef4ff;
-      --white:#fff;
-      --text:#10203f;
-      --muted:#60708c;
-      --line:#e2eaf7;
-      --green:#25d366;
-      --shadow:0 24px 80px rgba(6,22,63,.12);
-      --shadow-lg:0 30px 60px rgba(6,22,63,.22);
-      --glow-blue:0 0 0 rgba(0,102,255,0);
-      --ease:cubic-bezier(.19,1,.22,1);
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,Arial,sans-serif;
-      color:var(--text);
-      background:linear-gradient(180deg,#fff 0%,#f6f9ff 52%,#edf5ff 100%);
-      position:relative;
-    }
-
-    ::selection{background:rgba(0,102,255,.18);color:var(--navy)}
-
-    a{text-decoration:none;color:inherit}
-    .container{width:min(1160px,92%);margin:auto}
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background:rgba(255,255,255,.82);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid var(--line);
-      box-shadow:0 1px 0 rgba(6,22,63,.02), 0 20px 40px -28px rgba(6,22,63,.25);
-    }
-
-    header::after{
-      content:"";
-      display:block;
-      height:2px;
-      background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),transparent);
-      opacity:.55;
-    }
-
-    .nav{
-      height:78px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:24px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:900;
-      color:var(--navy);
-      letter-spacing:.08em;
-    }
-
-    .brand img{
-      height:50px;
-      max-width:210px;
-      object-fit:contain;
-    }
-
-    .navlinks{
-      display:flex;
-      align-items:center;
-      gap:24px;
-      font-size:14px;
-      color:var(--muted);
-      font-weight:700;
-    }
-
-    .btn{
-      position:relative;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border:none;
-      cursor:pointer;
-      border-radius:16px;
-      padding:15px 22px;
-      font-weight:900;
-      background:linear-gradient(135deg,var(--blue),#003bb8);
-      color:#fff;
-      box-shadow:0 16px 36px rgba(0,102,255,.24);
-      overflow:hidden;
-      isolation:isolate;
-      transition:transform .35s var(--ease),box-shadow .35s var(--ease);
-    }
-
-    .btn::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
-      transform:translateX(-120%);
-      transition:transform .7s var(--ease);
-    }
-
-    .btn:hover{
-      transform:translateY(-3px);
-      box-shadow:0 22px 46px rgba(0,102,255,.34);
-    }
-
-    .btn:hover::before{transform:translateX(120%)}
-
-    .btn:active{transform:translateY(-1px) scale(.98)}
-
-    .btn.secondary{
-      background:#fff;
-      color:var(--navy);
-      border:1px solid var(--line);
-      box-shadow:0 10px 28px rgba(6,22,63,.06);
-    }
-
-    .btn.secondary:hover{
-      border-color:var(--blue);
-      color:var(--blue);
-      background:#f5f9ff;
-      box-shadow:0 16px 34px rgba(6,22,63,.1);
-    }
-
-    .btn.whatsapp{
-      background:linear-gradient(135deg,#2be07f,var(--green) 60%,#1cb454);
-      box-shadow:0 18px 40px rgba(37,211,102,.27);
-    }
-
-    .btn.whatsapp:hover{
-      box-shadow:0 24px 50px rgba(37,211,102,.42);
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      border:1px solid #d7e6ff;
-      background:linear-gradient(180deg,#fff,#f4f9ff);
-      color:var(--blue);
-      padding:10px 16px;
-      border-radius:999px;
-      font-weight:900;
-      font-size:14px;
-      box-shadow:0 8px 20px rgba(0,102,255,.08);
-    }
-
-    .pill::before{
-      content:"";
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-      box-shadow:0 0 0 4px rgba(0,102,255,.14);
-    }
-
-    .hero{
-      position:relative;
-      padding:76px 0 56px;
-      overflow:hidden;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      top:-220px;
-      right:-160px;
-      width:640px;
-      height:640px;
-      background:radial-gradient(circle,rgba(0,102,255,.16),rgba(58,163,255,.05) 55%,transparent 70%);
-      filter:blur(10px);
-      pointer-events:none;
-      z-index:0;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      bottom:-260px;
-      left:-200px;
-      width:560px;
-      height:560px;
-      background:radial-gradient(circle,rgba(6,22,63,.08),transparent 65%);
-      pointer-events:none;
-      z-index:0;
-    }
-
-    .hero .hero-grid{position:relative;z-index:1}
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.04fr .96fr;
-      gap:44px;
-      align-items:center;
-    }
-
-    .hero h1{
-      font-size:clamp(38px,5vw,68px);
-      line-height:1.02;
-      letter-spacing:-.06em;
-      color:var(--navy);
-      margin:20px 0;
-    }
-
-    .hero p{
-      font-size:20px;
-      line-height:1.65;
-      color:var(--muted);
-      margin:0 0 28px;
-      max-width:650px;
-    }
-
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:30px;
-    }
-
-    .stat{
-      position:relative;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:18px;
-      box-shadow:0 12px 30px rgba(6,22,63,.05);
-      overflow:hidden;
-      transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
-    }
-
-    .stat::before{
-      content:"";
-      position:absolute;
-      top:0;left:0;right:0;
-      height:3px;
-      background:linear-gradient(90deg,var(--blue),var(--cyan));
-      transform:scaleX(0);
-      transform-origin:left;
-      transition:transform .35s var(--ease);
-    }
-
-    .stat:hover{
-      transform:translateY(-4px);
-      box-shadow:0 18px 36px rgba(6,22,63,.1);
-      border-color:#d7e6ff;
-    }
-
-    .stat:hover::before{transform:scaleX(1)}
-
-    .stat strong{
-      display:block;
-      font-size:25px;
-      background:linear-gradient(135deg,var(--navy),var(--blue));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .stat span{
-      display:block;
-      margin-top:5px;
-      font-size:13px;
-      color:var(--muted);
-      line-height:1.4;
-    }
-
-    .hero-panel{
-      position:relative;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:34px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      z-index:1;
-    }
-
-    .hero-panel::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      z-index:-1;
-      border-radius:36px;
-      background:conic-gradient(from 180deg,var(--blue),var(--cyan),#e8f2ff,var(--blue));
-      opacity:.5;
-      filter:blur(18px);
-    }
-
-    .logo-card{
-      display:grid;
-      place-items:center;
-      min-height:150px;
-      background:linear-gradient(180deg,#fff,#f8fbff);
-      border:1px solid var(--line);
-      border-radius:26px;
-      margin-bottom:16px;
-      padding:20px;
-    }
-
-    .logo-card img{
-      max-width:360px;
-      width:85%;
-      height:auto;
-      object-fit:contain;
-    }
-
-    .dashboard{
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius:26px;
-      padding:18px;
-      margin-bottom:16px;
-    }
-
-    .dash-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:18px;
-    }
-
-    .dash-title strong{
-      display:block;
-      color:var(--navy);
-      font-size:17px;
-    }
-
-    .dash-title span{
-      color:var(--muted);
-      font-size:13px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      background:#eaf3ff;
-      color:var(--blue);
-      border:1px solid #d7e9ff;
-      border-radius:999px;
-      padding:8px 11px;
-      font-size:12px;
-      font-weight:900;
-    }
-
-    .badge::before{
-      content:"";
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 0 0 rgba(37,211,102,.5);
-      animation:pulse-dot 2s infinite;
-    }
-
-    @keyframes pulse-dot{
-      0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}
-      70%{box-shadow:0 0 0 7px rgba(37,211,102,0)}
-      100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
-    }
-
-    .dash-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-    }
-
-    .dash-item{
-      background:#f8fbff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:14px;
-    }
-
-    .dash-item small{
-      display:block;
-      color:var(--muted);
-      margin-bottom:8px;
-      font-weight:700;
-    }
-
-    .dash-item strong{
-      color:var(--navy);
-      font-size:19px;
-    }
-
-    .progress{
-      height:8px;
-      background:#e8effa;
-      border-radius:999px;
-      overflow:hidden;
-      margin-top:12px;
-    }
-
-    .progress span{
-      display:block;
-      height:100%;
-      width:74%;
-      background:linear-gradient(90deg,var(--blue),var(--cyan));
-      border-radius:999px;
-    }
-
-    .video-box video{
-      width:100%;
-      display:block;
-      border-radius:24px;
-      background:#06163f;
-    }
-
-    .video-caption{
-      color:var(--muted);
-      font-size:14px;
-      padding:12px 4px 0;
-      line-height:1.5;
-    }
-
-    section{padding:66px 0}
-
-    .section-title{
-      text-align:center;
-      margin-bottom:34px;
-    }
-
-    .section-title::before{
-      content:"";
-      display:block;
-      width:54px;
-      height:5px;
-      margin:0 auto 18px;
-      border-radius:999px;
-      background:linear-gradient(90deg,var(--blue),var(--cyan));
-    }
-
-    .section-title h2{
-      font-size:clamp(30px,4vw,48px);
-      line-height:1.08;
-      letter-spacing:-.05em;
-      color:var(--navy);
-      margin:0 0 14px;
-    }
-
-    .section-title p{
-      max-width:780px;
-      margin:auto;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.65;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
-
-    .card{
-      position:relative;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:26px;
-      padding:28px;
-      box-shadow:0 12px 34px rgba(6,22,63,.05);
-      overflow:hidden;
-      transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
-    }
-
-    .card::before{
-      content:"";
-      position:absolute;
-      top:0;left:0;right:0;
-      height:3px;
-      background:linear-gradient(90deg,var(--blue),var(--cyan));
-      transform:scaleX(0);
-      transform-origin:left;
-      transition:transform .4s var(--ease);
-    }
-
-    .card:hover{
-      transform:translateY(-6px);
-      box-shadow:0 26px 50px rgba(6,22,63,.13);
-      border-color:#d7e6ff;
-    }
-
-    .card:hover::before{transform:scaleX(1)}
-
-    .icon{
-      width:48px;
-      height:48px;
-      border-radius:16px;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-      color:#fff;
-      display:grid;
-      place-items:center;
-      font-weight:900;
-      margin-bottom:18px;
-      box-shadow:0 12px 24px rgba(0,102,255,.28);
-      transition:transform .35s var(--ease);
-    }
-
-    .card:hover .icon{transform:scale(1.08) rotate(-4deg)}
-
-    .card h3{
-      margin:0 0 10px;
-      color:var(--navy);
-      font-size:20px;
-    }
-
-    .card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.65;
-    }
-
-    .split{
-      display:grid;
-      grid-template-columns:.92fr 1.08fr;
-      gap:28px;
-    }
-
-    .dark-box{
-      position:relative;
-      border-radius:34px;
-      padding:42px;
-      background:
-        radial-gradient(circle at 85% 0%,rgba(58,163,255,.35),transparent 55%),
-        linear-gradient(135deg,#06163f,#092a78);
-      color:#fff;
-      box-shadow:var(--shadow-lg);
-      overflow:hidden;
-    }
-
-    .dark-box::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-      background-size:34px 34px;
-      mask-image:radial-gradient(circle at 30% 30%,#000,transparent 70%);
-      pointer-events:none;
-    }
-
-    .dark-box > *{position:relative;z-index:1}
-
-    .dark-box h2{
-      font-size:40px;
-      line-height:1.12;
-      letter-spacing:-.04em;
-      margin:0 0 18px;
-    }
-
-    .dark-box p{
-      color:#d7e5ff;
-      line-height:1.75;
-      margin:0 0 16px;
-      font-size:17px;
-    }
-
-    .steps{
-      display:grid;
-      gap:14px;
-    }
-
-    .step{
-      display:flex;
-      gap:16px;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:20px;
-      box-shadow:0 10px 30px rgba(6,22,63,.05);
-      transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
-    }
-
-    .step:hover{
-      transform:translateX(6px);
-      box-shadow:0 16px 38px rgba(6,22,63,.1);
-      border-color:#d7e6ff;
-    }
-
-    .num{
-      flex:0 0 40px;
-      height:40px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg,var(--navy),var(--indigo));
-      color:#fff;
-      font-weight:900;
-      box-shadow:0 10px 20px rgba(6,22,63,.25);
-    }
-
-    .step strong{
-      color:var(--navy);
-      font-size:17px;
-    }
-
-    .step p{
-      margin:6px 0 0;
-      color:var(--muted);
-      line-height:1.55;
-    }
-
-    .clean-section{
-      background:#fff;
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-    }
-
-    .tint-section{
-      position:relative;
-      background:linear-gradient(180deg,#f4f8ff 0%,#eaf2ff 100%);
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      overflow:hidden;
-    }
-
-    .tint-section::before{
-      content:"";
-      position:absolute;
-      top:-180px;
-      left:50%;
-      transform:translateX(-50%);
-      width:520px;
-      height:520px;
-      background:radial-gradient(circle,rgba(0,102,255,.1),transparent 65%);
-      pointer-events:none;
-    }
-
-    .tint-section .container{position:relative;z-index:1}
-
-    .segments{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:12px;
-    }
-
-    .segment{
-      padding:12px 18px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--navy);
-      font-weight:800;
-      font-size:14px;
-      box-shadow:0 8px 20px rgba(6,22,63,.05);
-      transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease),color .3s var(--ease);
-    }
-
-    .segment:hover{
-      transform:translateY(-3px);
-      border-color:var(--blue);
-      background:linear-gradient(135deg,var(--blue),#0047c9);
-      color:#fff;
-      box-shadow:0 14px 28px rgba(0,102,255,.28);
-    }
-
-    .cta-box{
-      position:relative;
-      background:
-        radial-gradient(circle at 12% 110%,rgba(58,163,255,.4),transparent 55%),
-        linear-gradient(135deg,#06163f,#0046d5);
-      color:#fff;
-      border-radius:36px;
-      padding:42px;
-      display:grid;
-      grid-template-columns:1fr auto;
-      align-items:center;
-      gap:28px;
-      box-shadow:var(--shadow-lg);
-      overflow:hidden;
-    }
-
-    .cta-box > *{position:relative;z-index:1}
-
-    .cta-box h2{
-      margin:0 0 10px;
-      font-size:clamp(28px,4vw,44px);
-      letter-spacing:-.04em;
-    }
-
-    .cta-box p{
-      margin:0;
-      color:#d8e7ff;
-      line-height:1.6;
-      font-size:17px;
-    }
-
-    .form-wrap{
-      position:relative;
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:36px;
-      padding:34px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-
-    .form-wrap::before{
-      content:"";
-      position:absolute;
-      top:0;left:0;right:0;
-      height:5px;
-      background:linear-gradient(90deg,var(--blue),var(--cyan),var(--blue));
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:15px;
-    }
-
-    label{
-      display:block;
-      color:var(--navy);
-      font-size:14px;
-      font-weight:800;
-      margin-bottom:8px;
-    }
-
-    input,select,textarea{
-      width:100%;
-      border:1px solid var(--line);
-      background:#fbfdff;
-      color:var(--text);
-      border-radius:16px;
-      padding:15px;
-      font:inherit;
-      outline:none;
-      transition:border-color .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease);
-    }
-
-    input:hover,select:hover,textarea:hover{border-color:#c7dbff}
-
-    input:focus,select:focus,textarea:focus{
-      border-color:var(--blue);
-      background:#fff;
-      box-shadow:0 0 0 4px rgba(0,102,255,.12);
-    }
-
-    textarea{
-      min-height:116px;
-      resize:vertical;
-    }
-
-    .full{grid-column:1/-1}
-
-    .helper{
-      color:var(--muted);
-      font-size:13px;
-      margin:12px 0 0;
-      line-height:1.5;
-    }
-
-    .faq{
-      display:grid;
-      gap:12px;
-      max-width:880px;
-      margin:auto;
-    }
-
-    details{
-      background:#fff;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:20px;
-      box-shadow:0 10px 28px rgba(6,22,63,.04);
-      transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease);
-    }
-
-    details:hover{
-      transform:translateY(-2px);
-      box-shadow:0 16px 34px rgba(6,22,63,.09);
-      border-color:#d7e6ff;
-    }
-
-    details[open]{
-      border-color:var(--blue);
-      box-shadow:0 16px 34px rgba(0,102,255,.12);
-    }
-
-    summary{
-      cursor:pointer;
-      color:var(--navy);
-      font-weight:900;
-      font-size:17px;
-      list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-
-    summary::-webkit-details-marker{display:none}
-
-    summary::after{
-      content:"+";
-      flex:0 0 auto;
-      width:28px;
-      height:28px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--blue),var(--cyan));
-      color:#fff;
-      display:grid;
-      place-items:center;
-      font-size:18px;
-      font-weight:900;
-      transition:transform .3s var(--ease);
-    }
-
-    details[open] summary::after{transform:rotate(135deg)}
-
-    details p{
-      color:var(--muted);
-      line-height:1.6;
-      margin:14px 0 0;
-    }
-
-    footer{
-      position:relative;
-      padding:44px 0;
-      text-align:center;
-      color:#93a6d6;
-      background:linear-gradient(180deg,#06163f,#040f2e);
-      font-size:14px;
-    }
-
-    footer::before{
-      content:"";
-      display:block;
-      height:2px;
-      margin-bottom:44px;
-      background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),transparent);
-      opacity:.6;
-    }
-
-    .floating{
-      position:fixed;
-      right:22px;
-      bottom:22px;
-      z-index:80;
-      border-radius:999px;
-      padding:16px 20px;
-      background:linear-gradient(135deg,#2be07f,var(--green) 60%,#1cb454);
-      color:#fff;
-      font-weight:900;
-      box-shadow:0 18px 42px rgba(37,211,102,.34);
-      transition:transform .3s var(--ease),box-shadow .3s var(--ease);
-    }
-
-    .floating::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:999px;
-      box-shadow:0 0 0 0 rgba(37,211,102,.55);
-      animation:pulse-ring 2.4s infinite;
-      pointer-events:none;
-    }
-
-    .floating:hover{
-      transform:translateY(-4px) scale(1.03);
-      box-shadow:0 24px 52px rgba(37,211,102,.46);
-    }
-
-    @keyframes pulse-ring{
-      0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}
-      70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}
-      100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
-    }
-
-    .reveal{
-      opacity:0;
-      transform:translateY(18px);
-      transition:.7s ease;
-    }
-
-    .reveal.visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    @media(max-width:940px){
-      .hero-grid,.split,.cta-box{grid-template-columns:1fr}
-      .cards{grid-template-columns:1fr}
-      .stats,.dash-grid{grid-template-columns:1fr}
-      .navlinks{display:none}
-      .form-grid{grid-template-columns:1fr}
-      .full{grid-column:auto}
-      .hero{padding-top:44px}
-      .floating{left:18px;right:18px;text-align:center}
-      .brand span{display:none}
-    }
-
-    @media(prefers-reduced-motion:reduce){
-      *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faciamus Intelligence | Inteligência empresarial aplicada</title>
+<meta name="description" content="A Faciamus Intelligence transforma operações em sistemas inteligentes. Diagnóstico rápido para organizar sua empresa ou diagnóstico estratégico para arquitetar inteligência sob medida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,480;0,9..144,560;1,9..144,420&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ TOKENS ============ */
+  :root{
+    --bg: #F4F5F8;
+    --bg-soft: #EBEDF3;
+    --paper: #FFFFFF;
+    --ink: #000E34;
+    --ink-soft: #4B5468;
+    --ink-faint: #8990A4;
+    --line: #DADEE8;
+    --line-strong: #C3C8D6;
+    --accent: #0051FA;
+    --accent-ink: #003AC2;
+    --accent-tint: #E9F0FF;
+    --dark: #050B24;
+    --dark-2: #0B1330;
+    --dark-line: #1E2A4E;
+    --dark-ink: #EDF0F8;
+    --dark-ink-soft: #A0A8C0;
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+
+    --container: 1180px;
+    --radius: 2px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  .wrap{ max-width: var(--container); margin:0 auto; padding: 0 32px; }
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:""; width:16px; height:1px; background: var(--accent);
+  }
+  .eyebrow.on-dark{ color:#8CA0FF; }
+  .eyebrow.on-dark::before{ background:#8CA0FF; }
+
+  h1,h2,h3{ font-family: var(--font-display); font-weight:560; letter-spacing:-0.01em; }
+  .lede{ color: var(--ink-soft); font-size: 18px; line-height:1.65; max-width: 46ch; }
+
+  /* ============ NODE-GRAPH SIGNATURE MOTIF ============ */
+  .graph-field{ position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+  .graph-field svg{ width:100%; height:100%; }
+  .graph-line{
+    stroke: currentColor; stroke-width: 1; fill:none; opacity:.28;
+    stroke-dasharray: 4 620; stroke-dashoffset:0;
+    animation: draw 7s ease-in-out infinite alternate;
+  }
+  .graph-line.d2{ animation-delay: -1.4s; }
+  .graph-line.d3{ animation-delay: -3.1s; }
+  .graph-line.d4{ animation-delay: -4.6s; }
+  .graph-dot{ fill: currentColor; opacity:.55; }
+  @keyframes draw{
+    from{ stroke-dashoffset: 620; opacity:0; }
+    8%{ opacity:.35; }
+    to{ stroke-dashoffset: 0; opacity:.18; }
+  }
+
+  /* ============ NAV ============ */
+  header{
+    position: sticky; top:0; z-index:50;
+    background: rgba(243,244,239,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 32px;
+    max-width: var(--container); margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--font-display); font-weight:560; font-size:19px; letter-spacing:0.01em;
+  }
+  .brand .mark{
+    width:28px; height:28px; position:relative; flex-shrink:0;
+    object-fit: contain;
+  }
+  .nav-links{ display:flex; gap:34px; align-items:center; }
+  .nav-links a{
+    font-size:14px; color: var(--ink-soft); transition: color .2s;
+  }
+  .nav-links a:hover{ color: var(--ink); }
+  .nav-cta{
+    font-family: var(--font-mono); font-size:13px;
+    padding:10px 18px; border:1px solid var(--ink); color:var(--ink);
+    transition: all .2s;
+  }
+  .nav-cta:hover{ background: var(--ink); color: var(--bg); }
+  .nav-toggle{ display:none; }
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative; overflow:hidden;
+    padding: 108px 0 88px;
+    border-bottom: 1px solid var(--line);
+  }
+  .graph-field.hero-field{ color: var(--accent); }
+  .hero-inner{ position:relative; z-index:2; max-width: 760px; }
+  .hero h1{
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.08;
+    margin: 22px 0 24px;
+  }
+  .hero h1 em{ font-style:italic; color: var(--accent); }
+  .hero .lede{ font-size:19px; max-width: 52ch; margin-bottom: 40px; }
+
+  .fork{
+    display:flex; gap:0; border:1px solid var(--ink); max-width: 720px;
+  }
+  .fork-branch{
+    flex:1; padding: 26px 26px 24px; position:relative;
+    transition: background .25s;
+  }
+  .fork-branch + .fork-branch{ border-left:1px solid var(--ink); }
+  .fork-branch .fb-eyebrow{
+    font-family: var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color: var(--ink-faint); margin-bottom:10px; display:block;
+  }
+  .fork-branch h3{ font-size:19px; margin-bottom:8px; font-weight:520; }
+  .fork-branch p{ font-size:14px; color: var(--ink-soft); margin-bottom:18px; line-height:1.5; }
+  .fork-branch .fb-link{
+    font-family: var(--font-mono); font-size:13px; display:inline-flex; align-items:center; gap:8px;
+    color: var(--ink);
+  }
+  .fork-branch .fb-link::after{ content:"→"; transition: transform .2s; }
+  .fork-branch:hover .fb-link::after{ transform: translateX(4px); }
+  .fork-branch.strategic{ background: var(--ink); color: var(--bg); }
+  .fork-branch.strategic .fb-eyebrow{ color:#8CA0FF; }
+  .fork-branch.strategic p{ color:#B7B9C4; }
+  .fork-branch.strategic .fb-link{ color:#8CA0FF; }
+  .fork-branch:hover{ background: var(--accent-tint); }
+  .fork-branch.strategic:hover{ background:#181A22; }
+
+  /* ============ MANIFESTO STRIP ============ */
+  .manifesto{
+    background: var(--dark); color: var(--dark-ink);
+    padding: 90px 0; position:relative; overflow:hidden;
+  }
+  .graph-field.manifesto-field{ color:#8CA0FF; }
+  .manifesto .wrap{ position:relative; z-index:2; max-width:900px; }
+  .manifesto .word{
+    font-family: var(--font-display); font-style:italic; font-weight:420;
+    font-size: clamp(30px,4vw,44px); line-height:1.4; color: var(--dark-ink);
+  }
+  .manifesto .word span{ color:#8CA0FF; font-style:normal; }
+  .manifesto .attribution{
+    margin-top:28px; font-family: var(--font-mono); font-size:13px; color: var(--dark-ink-soft);
+  }
+
+  /* ============ SECTION SHELL ============ */
+  section{ padding: 96px 0; }
+  .section-head{ max-width: 640px; margin-bottom:56px; }
+  .section-head h2{ font-size: clamp(28px,3.4vw,40px); margin-top:16px; line-height:1.15; }
+
+  /* ============ TWO DOORS ============ */
+  .doors{ background: var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .doors-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:1px; background: var(--line); border:1px solid var(--line); }
+  .door{ background: var(--paper); padding: 44px 40px 40px; position:relative; }
+  .door .door-num{ font-family: var(--font-mono); font-size:12px; color: var(--ink-faint); letter-spacing:.1em; }
+  .door h3{ font-size:26px; margin: 14px 0 10px; }
+  .door .door-sub{ font-size:14px; color: var(--accent); font-family: var(--font-mono); margin-bottom:22px; }
+  .door p.desc{ color: var(--ink-soft); margin-bottom:26px; }
+  .door ul{ margin-bottom:30px; }
+  .door li{
+    font-size:14.5px; color: var(--ink); padding: 10px 0; border-top:1px solid var(--line);
+    display:flex; gap:10px;
+  }
+  .door li:first-child{ border-top:none; }
+  .door li::before{ content:"—"; color: var(--ink-faint); flex-shrink:0; }
+  .door-cta{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family: var(--font-mono); font-size:13px;
+    padding:13px 22px; border:1px solid var(--ink);
+    transition: all .2s;
+  }
+  .door-cta:hover{ background: var(--ink); color: var(--paper); }
+  .door.strategic .door-cta{ background: var(--accent); border-color: var(--accent); color:#fff; }
+  .door.strategic .door-cta:hover{ background: var(--accent-ink); border-color: var(--accent-ink); }
+  .door.strategic .door-sub{ color: var(--accent); }
+
+  @media (max-width: 820px){
+    .doors-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ============ METHOD ============ */
+  .method{ background: var(--bg-soft); }
+  .method-grid{
+    display:grid; grid-template-columns: repeat(4,1fr); gap:0;
+    border-top:1px solid var(--line-strong);
+  }
+  .method-step{ padding: 30px 26px 0; border-right:1px solid var(--line-strong); position:relative; }
+  .method-step:last-child{ border-right:none; }
+  .method-step .letter{
+    font-family: var(--font-display); font-style:italic; font-size:44px; color: var(--accent);
+    line-height:1; margin-bottom: 18px; display:block;
+  }
+  .method-step h4{ font-size:16px; margin-bottom:10px; letter-spacing:.01em; }
+  .method-step p{ font-size:13.5px; color: var(--ink-soft); line-height:1.55; }
+  .method-name{ font-family: var(--font-mono); font-size:13px; color: var(--ink-faint); margin-top:14px; letter-spacing:.05em; }
+  @media (max-width: 900px){
+    .method-grid{ grid-template-columns:1fr 1fr; }
+    .method-step{ border-bottom:1px solid var(--line-strong); padding-bottom:26px; }
+    .method-step:nth-child(2){ border-right:none; }
+    .method-step:nth-child(4){ border-right:none; }
+  }
+  @media (max-width:560px){
+    .method-grid{ grid-template-columns:1fr; }
+    .method-step{ border-right:none !important; }
+  }
+
+  /* ============ AI PHILOSOPHY ============ */
+  .philosophy{
+    background: var(--dark); color: var(--dark-ink); position:relative; overflow:hidden;
+  }
+  .phil-grid{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap:64px; align-items:start; position:relative; z-index:2; }
+  .phil-grid h2{ color:#fff; }
+  .phil-grid .lede{ color: var(--dark-ink-soft); }
+  .phil-list{ display:flex; flex-direction:column; gap:0; }
+  .phil-item{ padding: 22px 0; border-top:1px solid var(--dark-line); }
+  .phil-item:first-child{ border-top:none; }
+  .phil-item .k{ font-family: var(--font-mono); font-size:12px; color:#8CA0FF; margin-bottom:8px; display:block; }
+  .phil-item p{ color: var(--dark-ink); font-size:15.5px; line-height:1.6; }
+  @media (max-width:860px){ .phil-grid{ grid-template-columns:1fr; gap:36px; } }
+
+  /* ============ SEGMENTS ============ */
+  .segments-cols{ display:grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .seg-col h3{ font-size:15px; font-family: var(--font-mono); text-transform:uppercase; letter-spacing:.08em; color: var(--ink-faint); margin-bottom: 18px; font-weight:500; }
+  .seg-col ul li{
+    padding: 14px 0; border-top:1px solid var(--line); font-size:16px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .seg-col ul li:first-child{ border-top:none; }
+  .seg-col ul li span{ font-family: var(--font-mono); font-size:11px; color: var(--ink-faint); }
+  @media (max-width:720px){ .segments-cols{ grid-template-columns:1fr; gap:8px; } }
+
+  /* ============ FAQ ============ */
+  .faq-list{ border-top:1px solid var(--line); max-width: 800px; }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-q{
+    width:100%; display:flex; justify-content:space-between; align-items:center;
+    padding: 24px 0; text-align:left; font-size:17px; font-family: var(--font-display); font-weight:500;
+  }
+  .faq-q .plus{ font-family: var(--font-mono); font-size:18px; color: var(--accent); transition: transform .25s; flex-shrink:0; margin-left:20px; }
+  .faq-item.open .plus{ transform: rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition: max-height .3s ease; }
+  .faq-a p{ padding-bottom:24px; color: var(--ink-soft); max-width:64ch; }
+
+  /* ============ FINAL CTA ============ */
+  .final-cta{ background: var(--paper); border-top:1px solid var(--line); text-align:center; }
+  .final-cta .wrap{ max-width:700px; }
+  .final-cta h2{ font-size: clamp(28px,4vw,42px); margin: 18px 0 30px; }
+  .cta-row{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn{
+    font-family: var(--font-mono); font-size:13px; padding:15px 26px;
+    display:inline-flex; align-items:center; gap:10px; transition: all .2s;
+  }
+  .btn-primary{ background: var(--accent); color:#fff; }
+  .btn-primary:hover{ background: var(--accent-ink); }
+  .btn-ghost{ border:1px solid var(--ink); color: var(--ink); }
+  .btn-ghost:hover{ background: var(--ink); color: var(--bg); }
+
+  /* ============ PRÉ-DIAGNÓSTICO MODAL ============ */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:200; display:none;
+    align-items:center; justify-content:center;
+    background: rgba(5,11,36,0.74); backdrop-filter: blur(4px);
+    padding: 24px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-box{
+    background: var(--paper); width:100%; max-width:600px; max-height:88vh;
+    overflow-y:auto; padding: 44px 40px 36px; position:relative;
+    box-shadow: 0 40px 90px rgba(5,11,36,0.35);
+  }
+  .modal-close{
+    position:absolute; top:16px; right:16px; width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; color: var(--ink-faint); line-height:1; transition: color .2s;
+  }
+  .modal-close:hover{ color: var(--ink); }
+  .modal-box h3{ font-size:24px; margin: 14px 0 8px; line-height:1.2; }
+  .modal-box .lede.small{ font-size:14.5px; margin-bottom:28px; max-width:48ch; }
+  .f-row{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .field{ display:block; margin-bottom:20px; }
+  .field.full{ grid-column: 1 / -1; }
+  .field .flabel{
+    display:block; font-family: var(--font-mono); font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color: var(--ink-faint); margin-bottom:8px;
+  }
+  .field input, .field select, .field textarea{
+    width:100%; border:none; border-bottom:1px solid var(--line-strong);
+    background:transparent; padding:9px 0; font-family: var(--font-body);
+    font-size:15px; color: var(--ink); transition: border-color .2s;
+  }
+  .field textarea{ resize:vertical; min-height:64px; font-family: var(--font-body); }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-bottom-color: var(--accent);
+  }
+  .porta-toggle{ display:flex; gap:10px; margin-top:2px; }
+  .porta-opt{
+    flex:1; border:1px solid var(--line-strong); padding:13px 14px; text-align:left;
+    font-size:13px; color: var(--ink-soft); transition: all .2s; line-height:1.35;
+  }
+  .porta-opt:hover{ border-color: var(--ink-faint); }
+  .porta-opt.active{ border-color: var(--accent); background: var(--accent-tint); color: var(--accent-ink); }
+  .modal-submit{ width:100%; justify-content:center; margin-top:6px; }
+  .modal-note{ font-size:12px; color: var(--ink-faint); margin-top:14px; text-align:center; }
+  @media (max-width:560px){
+    .f-row{ grid-template-columns:1fr; }
+    .modal-box{ padding:36px 24px 28px; }
+  }
+
+  /* ============ FOOTER ============ */
+  footer{ background: var(--dark); color: var(--dark-ink-soft); padding: 56px 0 36px; }
+  .footer-top{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; padding-bottom:36px; border-bottom:1px solid var(--dark-line); margin-bottom:24px; }
+  .footer-word{ font-family: var(--font-display); font-style:italic; font-size:22px; color:#fff; }
+  .footer-bottom{ display:flex; justify-content:space-between; font-size:12.5px; flex-wrap:wrap; gap:10px; }
+  .footer-bottom .font-mono{ font-family: var(--font-mono); }
+
+  @media (max-width:720px){
+    .nav-links{ display:none; }
+    .wrap{ padding:0 20px; }
+    .hero{ padding:80px 0 60px; }
+    .fork{ flex-direction:column; }
+    .fork-branch + .fork-branch{ border-left:none; border-top:1px solid var(--ink); }
+    section{ padding:64px 0; }
+  }
+</style>
 </head>
-
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#top">
-        <img src="/LOGO.png" alt="Faciamus Intelligence">
-        <span>FACIAMUS</span>
-      </a>
 
-      <nav class="navlinks">
-        <a href="#segmentos">Segmentos</a>
-        <a href="#solucoes">Soluções</a>
-        <a href="#processo">Como funciona</a>
-        <a href="#contato">Diagnóstico</a>
-        <a class="btn" href="#contato">Solicitar proposta</a>
+<header>
+  <div class="nav wrap" style="padding-left:0;padding-right:0;">
+    <a href="#top" class="brand">
+      <img class="mark" src="logo-icone.png" alt="" width="28" height="28">
+      Faciamus
+    </a>
+    <nav class="nav-links">
+      <a href="#portas">Portas de entrada</a>
+      <a href="#metodo">Método</a>
+      <a href="#segmentos">Segmentos</a>
+      <a href="#faq">Perguntas</a>
+    </nav>
+    <button class="nav-cta js-open-diag" data-porta="">Falar com a Faciamus</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="graph-field hero-field" aria-hidden="true">
+      <svg viewBox="0 0 1180 640" preserveAspectRatio="xMidYMid slice">
+        <path class="graph-line" d="M 920 40 L 1060 160 L 1010 300 L 1140 420" />
+        <path class="graph-line d2" d="M 980 480 L 880 380 L 950 220" />
+        <path class="graph-line d3" d="M 1100 60 L 980 180" />
+        <circle class="graph-dot" cx="920" cy="40" r="3"/>
+        <circle class="graph-dot" cx="1060" cy="160" r="3"/>
+        <circle class="graph-dot" cx="1010" cy="300" r="3"/>
+        <circle class="graph-dot" cx="1140" cy="420" r="3"/>
+        <circle class="graph-dot" cx="980" cy="480" r="3"/>
+        <circle class="graph-dot" cx="880" cy="380" r="3"/>
+        <circle class="graph-dot" cx="950" cy="220" r="3"/>
+        <circle class="graph-dot" cx="1100" cy="60" r="3"/>
+        <circle class="graph-dot" cx="980" cy="180" r="3"/>
+      </svg>
+    </div>
+
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="eyebrow">Faciamus Intelligence — inteligência empresarial aplicada</span>
+        <h1>Sua operação vai <em>pensar</em> por você.</h1>
+        <p class="lede">Unimos diagnóstico, tecnologia e inteligência artificial para transformar operações complexas em sistemas simples, automatizados e inteligentes. Não vendemos sistema — construímos a inteligência que a sua operação está pedindo.</p>
+
+        <div class="fork">
+          <a href="#porta-rapida" class="fork-branch rapida">
+            <span class="fb-eyebrow">Porta 01</span>
+            <h3>Organizar minha operação agora</h3>
+            <p>Gestão, vendas, estoque e fiscal funcionando de forma simples, rápida e sem retrabalho.</p>
+            <span class="fb-link">Diagnóstico rápido</span>
+          </a>
+          <a href="#porta-estrategica" class="fork-branch strategic">
+            <span class="fb-eyebrow">Porta 02</span>
+            <h3>Repensar a inteligência do negócio</h3>
+            <p>Arquitetura sob medida, automação e IA aplicada à estratégia da operação.</p>
+            <span class="fb-link">Diagnóstico estratégico</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="graph-field manifesto-field" aria-hidden="true">
+      <svg viewBox="0 0 1180 400" preserveAspectRatio="xMidYMid slice">
+        <path class="graph-line" d="M 60 40 L 180 120 L 140 260" />
+        <path class="graph-line d3" d="M 40 320 L 160 260" />
+        <circle class="graph-dot" cx="60" cy="40" r="3"/>
+        <circle class="graph-dot" cx="180" cy="120" r="3"/>
+        <circle class="graph-dot" cx="140" cy="260" r="3"/>
+        <circle class="graph-dot" cx="40" cy="320" r="3"/>
+      </svg>
+    </div>
+    <div class="wrap">
+      <p class="eyebrow on-dark">O que significa o nosso nome</p>
+      <p class="word" style="margin-top:20px;">"Faciamus" vem do latim e significa <span>façamos</span> — uma convocação à ação coletiva. Não estamos aqui para vender mais um sistema. Estamos aqui para devolver tempo a quem constrói.</p>
+      <p class="attribution">Manifesto Faciamus, primeira linha</p>
+    </div>
+  </section>
+
+  <!-- TWO DOORS -->
+  <section class="doors" id="portas">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Duas portas de entrada</p>
+        <h2>A inteligência certa depende do tamanho do problema.</h2>
+        <p class="lede" style="margin-top:14px;">Sua operação te diz muito sobre o que ela precisa. Nós ouvimos isso primeiro — e indicamos o caminho certo, não o caminho padrão.</p>
+      </div>
+    </div>
+    <div class="wrap" style="padding:0;">
+      <div class="doors-grid">
+        <div class="door" id="porta-rapida">
+          <span class="door-num">Porta 01 / 02</span>
+          <h3>Diagnóstico rápido</h3>
+          <span class="door-sub">Para organizar a operação agora</span>
+          <p class="desc">Ideal para negócios que precisam sair do improviso: comércio, oficinas, distribuidoras e prestadores de serviço que já sentem a falta de controle no dia a dia.</p>
+          <ul>
+            <li>Sistema de gestão empresarial — financeiro, vendas e estoque</li>
+            <li>PDV mobile e força de vendas</li>
+            <li>Emissão fiscal integrada — pelo sistema web ou pelo app, Android e iOS</li>
+            <li>E-commerce com integração Mercado Livre e TikTok Shop</li>
+            <li>Automação de pedidos e atendimento via WhatsApp</li>
+            <li>Implantação acompanhada, com treinamento da equipe</li>
+          </ul>
+          <button class="door-cta js-open-diag" data-porta="Diagnóstico rápido">Começar diagnóstico rápido →</button>
+        </div>
+        <div class="door strategic" id="porta-estrategica">
+          <span class="door-num">Porta 02 / 02</span>
+          <h3>Diagnóstico estratégico</h3>
+          <span class="door-sub">Para arquitetar inteligência sob medida</span>
+          <p class="desc">Para empresas em crescimento, com operação mais complexa, que já sentem a dor de crescer no volume sem crescer em inteligência — e querem decidir com dados, não no escuro.</p>
+          <ul>
+            <li>Mapeamento profundo de processos e dados críticos</li>
+            <li>Arquitetura de automação e IA aplicada à operação</li>
+            <li>Operação omnichannel — e-commerce, marketplaces e ERP unificados</li>
+            <li>Desenvolvimento sob medida quando nenhuma solução pronta atende</li>
+            <li>Dashboards e inteligência de gestão orientada a decisão</li>
+            <li>Metodologia F.A.Ç.A. do diagnóstico à autonomia do time</li>
+          </ul>
+          <button class="door-cta js-open-diag" data-porta="Diagnóstico estratégico">Começar diagnóstico estratégico →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD -->
+  <section class="method" id="metodo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Como pensamos antes de programar</p>
+        <h2>Método F.A.Ç.A.</h2>
+        <p class="lede" style="margin-top:14px;">Uma sequência de raciocínio, não um pacote fechado. Nasce do próprio nome da marca — porque inteligência real começa antes da tecnologia.</p>
+      </div>
+    </div>
+    <div class="wrap" style="padding:0;">
+      <div class="method-grid">
+        <div class="method-step">
+          <span class="letter">F</span>
+          <h4>Fundamento</h4>
+          <p>Diagnóstico profundo da operação: processos, dados, gargalos e decisões críticas — antes de qualquer tecnologia ser proposta.</p>
+          <p class="method-name">01 — diagnóstico</p>
+        </div>
+        <div class="method-step">
+          <span class="letter">A</span>
+          <h4>Arquitetura</h4>
+          <p>Desenho da inteligência necessária: qual automação, qual IA, qual integração resolve o problema real — não o aparente.</p>
+          <p class="method-name">02 — desenho</p>
+        </div>
+        <div class="method-step">
+          <span class="letter">Ç</span>
+          <h4>Çonstrução</h4>
+          <p>Implementação técnica sob medida: automação de processos, integração de sistemas e IA aplicada ao seu negócio.</p>
+          <p class="method-name">03 — implementação</p>
+        </div>
+        <div class="method-step">
+          <span class="letter">A</span>
+          <h4>Autonomia</h4>
+          <p>Transferência de inteligência ao time: dashboards, treinamento e processos documentados para operar com autonomia real.</p>
+          <p class="method-name">04 — entrega</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI PHILOSOPHY -->
+  <section class="philosophy">
+    <div class="graph-field" style="color:#8CA0FF;" aria-hidden="true">
+      <svg viewBox="0 0 1180 520" preserveAspectRatio="xMidYMid slice">
+        <path class="graph-line d4" d="M 1080 60 L 980 160 L 1040 300" />
+        <circle class="graph-dot" cx="1080" cy="60" r="3"/>
+        <circle class="graph-dot" cx="980" cy="160" r="3"/>
+        <circle class="graph-dot" cx="1040" cy="300" r="3"/>
+      </svg>
+    </div>
+    <div class="wrap">
+      <div class="phil-grid">
+        <div>
+          <p class="eyebrow on-dark">Filosofia de IA</p>
+          <h2 style="margin-top:16px;">Não acreditamos em inteligência artificial como espetáculo.</h2>
+          <p class="lede" style="margin-top:16px;">Acreditamos em inteligência artificial como alicerce — a que você para de notar, porque ela já faz parte de como sua empresa pensa.</p>
+        </div>
+        <div class="phil-list">
+          <div class="phil-item">
+            <span class="k">Potencializa, não substitui</span>
+            <p>IA não substitui pessoas — substitui o trabalho que nunca deveria ter sido humano. Potencializa quem decide.</p>
+          </div>
+          <div class="phil-item">
+            <span class="k">Invisível na operação</span>
+            <p>A tecnologia certa é a que você para de perceber que existe — visível apenas no resultado: mais tempo, mais clareza.</p>
+          </div>
+          <div class="phil-item">
+            <span class="k">Reduz complexidade</span>
+            <p>IA deve simplificar a decisão, nunca criar uma camada nova de complexidade sobre o problema original.</p>
+          </div>
+          <div class="phil-item">
+            <span class="k">Integrada, não anexada</span>
+            <p>IA faz parte do negócio — não é um recurso isolado ou uma vitrine tecnológica ao lado da operação real.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEGMENTS -->
+  <section id="segmentos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Para quem construímos</p>
+        <h2>A solução ideal depende da realidade do seu negócio.</h2>
+      </div>
+      <div class="segments-cols">
+        <div class="seg-col">
+          <h3>Porta rápida</h3>
+          <ul>
+            <li>Comércio e varejo <span>gestão + PDV</span></li>
+            <li>Lojistas de e-commerce <span>Mercado Livre + TikTok Shop</span></li>
+            <li>Oficinas mecânicas <span>gestão + fiscal</span></li>
+            <li>Petshops <span>vendas + estoque</span></li>
+            <li>Prestadores de serviço <span>automação</span></li>
+          </ul>
+        </div>
+        <div class="seg-col">
+          <h3>Porta estratégica</h3>
+          <ul>
+            <li>Indústrias <span>arquitetura + IA</span></li>
+            <li>Distribuidoras <span>dados + BI</span></li>
+            <li>Redes com múltiplas unidades <span>inteligência centralizada</span></li>
+            <li>Empresas em expansão acelerada <span>método F.A.Ç.A.</span></li>
+            <li>Operações com times entre 11–30+ usuários <span>desenvolvimento sob medida</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:var(--bg-soft); border-top:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Perguntas frequentes</p>
+        <h2>O que costumam nos perguntar.</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Como saber qual porta é a minha? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Você não precisa decidir sozinho. Ao falar com a Faciamus, o próprio diagnóstico aponta o caminho — organização imediata ou arquitetura estratégica — de acordo com a complexidade real da sua operação.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">A Faciamus entrega sistema pronto ou desenvolve sob medida? <span class="plus">+</span></button>
+          <div class="faq-a"><p>As duas coisas, a partir do diagnóstico. Quando um sistema padrão resolve o problema real, indicamos e implantamos. Quando não resolve, arquitetamos e desenvolvemos uma solução própria para sua operação.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Preciso ter um time técnico para implementar? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Não. A implantação é acompanhada do início ao fim — configuração, treinamento e suporte — para que sua equipe use a solução de verdade, não apenas a instale.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Onde entra a inteligência artificial nisso? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Na porta estratégica, a IA é parte da arquitetura: automações inteligentes, leitura de dados e apoio à decisão. Na porta rápida, a prioridade é organizar a base — a inteligência avançada entra quando a operação já tem chão para sustentá-la.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Vocês integram com Mercado Livre e TikTok Shop? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Sim. O sistema de e-commerce da Faciamus conecta seu estoque, pedidos e financeiro diretamente ao Mercado Livre e ao TikTok Shop — sem planilha paralela e sem risco de vender o que não existe mais em estoque. Para operações com múltiplos canais, isso entra como parte da arquitetura omnichannel da porta estratégica.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Dá para emitir nota fiscal pelo celular? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Sim. A emissão fiscal funciona tanto no sistema web quanto no aplicativo, disponível para Android e iOS — você emite a nota na hora, direto do balcão, da oficina ou em campo, sem depender de estar no computador.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="contato">
+    <div class="wrap">
+      <p class="eyebrow" style="justify-content:center;">Comece por onde sua operação está hoje</p>
+      <h2>Façamos sua operação pensar.</h2>
+      <p class="lede" style="margin:0 auto 34px; text-align:center;">Conte um pouco do seu negócio e receba o direcionamento certo — organização imediata ou inteligência estratégica sob medida.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary js-open-diag" data-porta="Diagnóstico rápido">Diagnóstico rápido</button>
+        <button class="btn btn-ghost js-open-diag" data-porta="Diagnóstico estratégico">Diagnóstico estratégico</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <img src="logo-icone-branco.png" alt="Faciamus Intelligence" style="width:34px; height:auto;">
+        <span class="footer-word">"Façamos."</span>
+      </div>
+      <nav class="nav-links" style="gap:24px;">
+        <a href="#portas" style="color:var(--dark-ink-soft);">Portas de entrada</a>
+        <a href="#metodo" style="color:var(--dark-ink-soft);">Método</a>
+        <a href="#faq" style="color:var(--dark-ink-soft);">Perguntas</a>
       </nav>
     </div>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <span class="pill">Faciamus Intelligence · Consultoria + Tecnologia</span>
-          <h1>Organize sua empresa, venda melhor e tome decisões com inteligência.</h1>
-          <p>
-            A Faciamus Intelligence conecta sua necessidade à solução certa:
-            consultoria empresarial, sistemas de gestão, PDV mobile, emissão fiscal,
-            automações, relatórios e desenvolvimento sob medida.
-          </p>
-
-          <div class="actions">
-            <a class="btn whatsapp" href="#contato">Quero uma proposta personalizada</a>
-            <a class="btn secondary" href="#demo">Ver demonstração</a>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <strong>360°</strong>
-              <span>diagnóstico, tecnologia, implantação e suporte</span>
-            </div>
-            <div class="stat">
-              <strong>PMEs</strong>
-              <span>foco em pequenos e médios negócios</span>
-            </div>
-            <div class="stat">
-              <strong>Dados</strong>
-              <span>gestão com indicadores e visão gerencial</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-panel reveal" id="demo">
-          <div class="logo-card">
-            <img src="/LOGO.png" alt="Logo Faciamus Intelligence">
-          </div>
-
-          <div class="dashboard">
-            <div class="dash-top">
-              <div class="dash-title">
-                <strong>Caixa inteligente da operação</strong>
-                <span>vendas, financeiro, estoque e indicadores</span>
-              </div>
-              <div class="badge">Online</div>
-            </div>
-
-            <div class="dash-grid">
-              <div class="dash-item">
-                <small>Vendas</small>
-                <strong>PDV Mobile</strong>
-                <div class="progress"><span></span></div>
-              </div>
-              <div class="dash-item">
-                <small>Gestão</small>
-                <strong>ERP</strong>
-                <div class="progress"><span style="width:82%"></span></div>
-              </div>
-              <div class="dash-item">
-                <small>Inteligência</small>
-                <strong>BI</strong>
-                <div class="progress"><span style="width:66%"></span></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="video-box">
-            <video controls playsinline preload="metadata" poster="/LOGO.png">
-              <source src="https://res.cloudinary.com/dsjfgvxpd/video/upload/f_auto,q_auto/v1782419512/demo_ubuc89.mp4" type="video/mp4">
-              Seu navegador não suporta vídeo.
-            </video>
-          </div>
-
-          <div class="video-caption">
-            Demonstração do sistema de vendas e PDV mobile.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="segmentos" class="tint-section">
-      <div class="container">
-        <div class="section-title reveal">
-          <h2>Atendemos diferentes segmentos</h2>
-          <p>
-            A solução ideal depende da realidade do seu negócio.
-            Por isso o primeiro passo é entender seu segmento e sua principal necessidade.
-          </p>
-        </div>
-
-        <div class="segments reveal">
-          <span class="segment">Comércio e varejo</span>
-          <span class="segment">Oficinas mecânicas</span>
-          <span class="segment">Clínicas</span>
-          <span class="segment">Prestadores de serviço</span>
-          <span class="segment">Indústrias</span>
-          <span class="segment">Distribuidoras</span>
-          <span class="segment">Lojas de roupas</span>
-          <span class="segment">Petshops</span>
-          <span class="segment">Empresas em crescimento</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="solucoes">
-      <div class="container">
-        <div class="section-title reveal">
-          <h2>Soluções para transformar gestão em resultado</h2>
-          <p>
-            Antes de indicar uma ferramenta, entendemos o processo da empresa.
-            Depois apresentamos a melhor solução: produto pronto, consultoria,
-            automação ou desenvolvimento próprio.
-          </p>
-        </div>
-
-        <div class="cards">
-          <div class="card reveal">
-            <div class="icon">01</div>
-            <h3>Sistema de gestão empresarial</h3>
-            <p>Controle financeiro, vendas, estoque, emissão de notas fiscais, relatórios e rotina administrativa em um só lugar.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon">02</div>
-            <h3>PDV mobile e força de vendas</h3>
-            <p>Venda pelo celular, consulte produtos, gere pedidos e acompanhe a operação com mais agilidade.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon">03</div>
-            <h3>Consultoria empresarial</h3>
-            <p>Mapeamento de processos, organização operacional e implantação de tecnologia de forma simples e acompanhada.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon">04</div>
-            <h3>Automações e WhatsApp</h3>
-            <p>Pedidos, orçamentos, comunicação com clientes e fluxos automatizados para reduzir retrabalho.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon">05</div>
-            <h3>Desenvolvimento sob medida</h3>
-            <p>Quando uma solução pronta não atende, desenhamos e desenvolvemos uma ferramenta própria para sua operação.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon">06</div>
-            <h3>Relatórios e inteligência</h3>
-            <p>Indicadores, dashboards e visão gerencial para tomar decisões com dados, não no escuro.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="processo" class="clean-section">
-      <div class="container split">
-        <div class="dark-box reveal">
-          <h2>A ponte entre a desorganização e o lucro real.</h2>
-          <p>
-            A Faciamus Intelligence existe para ajudar pequenas e médias empresas
-            a saírem do improviso e construírem uma gestão profissional.
-          </p>
-          <p>
-            Você não precisa saber qual sistema comprar. Precisa explicar seu problema.
-            Nós ajudamos a encontrar a solução mais inteligente.
-          </p>
-          <a class="btn whatsapp" href="#contato">Começar diagnóstico</a>
-        </div>
-
-        <div class="steps reveal">
-          <div class="step">
-            <div class="num">1</div>
-            <div>
-              <strong>Diagnóstico rápido</strong>
-              <p>Entendemos o segmento, tamanho da empresa, dores, processos e prioridades.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="num">2</div>
-            <div>
-              <strong>Indicação da solução</strong>
-              <p>Apresentamos sistema pronto, automação, consultoria ou desenvolvimento sob medida.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="num">3</div>
-            <div>
-              <strong>Implantação acompanhada</strong>
-              <p>Configuração, treinamento e suporte para a equipe usar a solução de verdade.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div class="num">4</div>
-            <div>
-              <strong>Evolução contínua</strong>
-              <p>Acompanhamos melhorias, indicadores e novas necessidades do negócio.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="cta-box reveal">
-          <div>
-            <h2>Não sabe qual sistema sua empresa precisa?</h2>
-            <p>
-              Tudo bem. A Faciamus faz o diagnóstico e direciona sua empresa para a melhor solução.
-            </p>
-          </div>
-          <a class="btn whatsapp" href="#contato">Falar com consultor</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contato">
-      <div class="container">
-        <div class="section-title reveal">
-          <h2>Receba uma proposta personalizada</h2>
-          <p>
-            Preencha os dados abaixo. Ao enviar, você será direcionado ao WhatsApp
-            com as informações já filtradas por segmento e necessidade.
-          </p>
-        </div>
-
-        <div class="form-wrap reveal">
-          <form id="leadForm">
-            <div class="form-grid">
-              <div>
-                <label for="nome">Nome</label>
-                <input id="nome" required placeholder="Seu nome">
-              </div>
-
-              <div>
-                <label for="empresa">Empresa</label>
-                <input id="empresa" required placeholder="Nome da empresa">
-              </div>
-
-              <div>
-                <label for="segmento">Segmento do negócio</label>
-                <select id="segmento" required>
-                  <option value="">Selecione</option>
-                  <option>Comércio / Varejo</option>
-                  <option>Oficina mecânica</option>
-                  <option>Clínica / Saúde</option>
-                  <option>Prestador de serviço</option>
-                  <option>Indústria / Produção</option>
-                  <option>Distribuidora</option>
-                  <option>Petshop</option>
-                  <option>Outro</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="necessidade">Principal necessidade</label>
-                <select id="necessidade" required>
-                  <option value="">Selecione</option>
-                  <option>Sistema de gestão ERP</option>
-                  <option>PDV mobile / vendas externas</option>
-                  <option>Emissão de notas fiscais</option>
-                  <option>Controle financeiro</option>
-                  <option>Estoque e compras</option>
-                  <option>Automação WhatsApp</option>
-                  <option>Relatórios / Power BI</option>
-                  <option>Desenvolvimento de sistema próprio</option>
-                  <option>Consultoria empresarial</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="tamanho">Tamanho da empresa</label>
-                <select id="tamanho">
-                  <option>1 a 3 usuários</option>
-                  <option>4 a 10 usuários</option>
-                  <option>11 a 30 usuários</option>
-                  <option>Mais de 30 usuários</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="telefone">Telefone</label>
-                <input id="telefone" placeholder="(00) 00000-0000">
-              </div>
-
-              <div class="full">
-                <label for="mensagem">Conte um pouco do que você precisa</label>
-                <textarea id="mensagem" placeholder="Ex.: preciso organizar financeiro, emitir notas e vender pelo celular..."></textarea>
-              </div>
-
-              <div class="full">
-                <button class="btn whatsapp" type="submit">Enviar para WhatsApp</button>
-                <p class="helper">
-                  A mensagem será enviada para o WhatsApp da Faciamus já com segmento,
-                  necessidade e resumo do projeto.
-                </p>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <section class="tint-section">
-      <div class="container">
-        <div class="section-title reveal">
-          <h2>Dúvidas frequentes</h2>
-        </div>
-
-        <div class="faq reveal">
-          <details>
-            <summary>A Faciamus vende apenas sistema pronto?</summary>
-            <p>Não. A Faciamus pode indicar produtos prontos do portfólio, prestar consultoria empresarial, criar automações ou desenvolver uma solução própria conforme a necessidade do cliente.</p>
-          </details>
-
-          <details>
-            <summary>O atendimento é indicado para empresas pequenas?</summary>
-            <p>Sim. O foco principal são pequenas e médias empresas que precisam organizar processos, melhorar controle financeiro, vender melhor e ganhar eficiência operacional.</p>
-          </details>
-
-          <details>
-            <summary>Consigo receber uma proposta personalizada?</summary>
-            <p>Sim. O formulário envia as informações filtradas para o WhatsApp, permitindo entender segmento, necessidade e tamanho da empresa antes da proposta.</p>
-          </details>
-
-          <details>
-            <summary>Vocês fazem implantação e treinamento?</summary>
-            <p>Sim. A proposta pode incluir configuração, treinamento, acompanhamento e suporte para garantir que a solução seja usada corretamente pela equipe.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <a class="floating" href="#contato">Falar no WhatsApp</a>
-
-  <footer>
-    <div class="container">
-      © <span id="year"></span> Faciamus Intelligence. Soluções inteligentes geram resultados.
+    <div class="footer-bottom">
+      <span class="font-mono">© Faciamus Intelligence</span>
+      <span class="font-mono">Inteligência empresarial aplicada</span>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    const whatsappNumber = "554491755022";
+<!-- PRÉ-DIAGNÓSTICO -->
+<div class="modal-overlay" id="diag-overlay" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="diag-title">
+    <button type="button" class="modal-close" id="diag-close" aria-label="Fechar">×</button>
+    <span class="eyebrow">Pré-diagnóstico Faciamus</span>
+    <h3 id="diag-title">Antes de conversar, queremos te ouvir.</h3>
+    <p class="lede small">Leva menos de um minuto. Suas respostas já chegam prontas no WhatsApp da Faciamus — sem repetir tudo de novo por mensagem.</p>
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    <form id="diag-form">
+      <div class="f-row">
+        <label class="field">
+          <span class="flabel">Seu nome</span>
+          <input type="text" name="nome" required>
+        </label>
+        <label class="field">
+          <span class="flabel">Empresa</span>
+          <input type="text" name="empresa">
+        </label>
+      </div>
 
-    document.getElementById("leadForm").addEventListener("submit", function(event) {
-      event.preventDefault();
+      <div class="f-row">
+        <label class="field">
+          <span class="flabel">Segmento do negócio</span>
+          <select name="segmento">
+            <option value="">Selecione</option>
+            <option>Comércio / Varejo</option>
+            <option>Oficina mecânica</option>
+            <option>Prestador de serviço</option>
+            <option>Indústria / Produção</option>
+            <option>Distribuidora</option>
+            <option>Petshop</option>
+            <option>E-commerce / Marketplace</option>
+            <option>Outro</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="flabel">Tamanho da empresa</span>
+          <select name="tamanho">
+            <option value="">Selecione</option>
+            <option>1 a 3 usuários</option>
+            <option>4 a 10 usuários</option>
+            <option>11 a 30 usuários</option>
+            <option>Mais de 30 usuários</option>
+          </select>
+        </label>
+      </div>
 
-      const nome = document.getElementById("nome").value.trim();
-      const empresa = document.getElementById("empresa").value.trim();
-      const segmento = document.getElementById("segmento").value;
-      const necessidade = document.getElementById("necessidade").value;
-      const tamanho = document.getElementById("tamanho").value;
-      const telefone = document.getElementById("telefone").value.trim();
-      const mensagem = document.getElementById("mensagem").value.trim();
+      <div class="field full">
+        <span class="flabel">Qual porta faz mais sentido pra você agora?</span>
+        <div class="porta-toggle" id="porta-toggle">
+          <button type="button" class="porta-opt" data-porta="Diagnóstico rápido">Organizar a operação agora</button>
+          <button type="button" class="porta-opt" data-porta="Diagnóstico estratégico">Repensar a inteligência do negócio</button>
+        </div>
+      </div>
 
-      const texto =
-        `Olá, vim pela landing page da Faciamus Intelligence.\n\n` +
-        `Nome: ${nome}\n` +
-        `Empresa: ${empresa}\n` +
-        `Segmento: ${segmento}\n` +
-        `Necessidade: ${necessidade}\n` +
-        `Tamanho da empresa: ${tamanho}\n` +
-        `Telefone: ${telefone}\n\n` +
-        `Resumo da necessidade: ${mensagem || "Não informado"}\n\n` +
-        `Gostaria de receber uma proposta personalizada.`;
+      <label class="field full">
+        <span class="flabel">Conte um pouco do que você precisa</span>
+        <textarea name="mensagem" rows="3" placeholder="Ex.: quero organizar meu financeiro e vender no Mercado Livre"></textarea>
+      </label>
 
-      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(texto)}`;
-      window.open(url, "_blank");
+      <label class="field full">
+        <span class="flabel">Seu WhatsApp</span>
+        <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+      </label>
+
+      <button type="submit" class="btn btn-primary modal-submit">Enviar para o WhatsApp →</button>
+      <p class="modal-note">Ao enviar, abrimos o WhatsApp com suas respostas já preenchidas para a Faciamus.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var answer = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+        if(openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-q').setAttribute('aria-expanded','false');
+          openItem.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // ===== PRÉ-DIAGNÓSTICO: abrir/fechar caixa e montar mensagem do WhatsApp =====
+  (function(){
+    var WHATSAPP_NUMBER = "5544991755022"; // Faciamus Intelligence
+
+    var overlay = document.getElementById('diag-overlay');
+    var closeBtn = document.getElementById('diag-close');
+    var form = document.getElementById('diag-form');
+    var portaToggle = document.getElementById('porta-toggle');
+    var portaButtons = portaToggle.querySelectorAll('.porta-opt');
+    var lastFocused = null;
+
+    function setPorta(valor){
+      portaButtons.forEach(function(b){
+        b.classList.toggle('active', b.dataset.porta === valor);
+      });
+      form.dataset.porta = valor || '';
+    }
+
+    portaButtons.forEach(function(b){
+      b.addEventListener('click', function(){ setPorta(b.dataset.porta); });
     });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    }, { threshold: 0.12 });
+    function openModal(porta){
+      lastFocused = document.activeElement;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      if(porta){ setPorta(porta); }
+      document.body.style.overflow = 'hidden';
+      var firstField = form.querySelector('input[name="nome"]');
+      if(firstField){ setTimeout(function(){ firstField.focus(); }, 50); }
+    }
 
-    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-  </script>
+    function closeModal(){
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if(lastFocused){ lastFocused.focus(); }
+    }
+
+    document.querySelectorAll('.js-open-diag').forEach(function(trigger){
+      trigger.addEventListener('click', function(e){
+        e.preventDefault();
+        openModal(trigger.dataset.porta || '');
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay){ closeModal(); }
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && overlay.classList.contains('open')){ closeModal(); }
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var data = new FormData(form);
+      var nome = (data.get('nome') || '').trim();
+      var empresa = (data.get('empresa') || '').trim();
+      var segmento = data.get('segmento') || '';
+      var tamanho = data.get('tamanho') || '';
+      var porta = form.dataset.porta || '';
+      var mensagem = (data.get('mensagem') || '').trim();
+      var telefone = (data.get('telefone') || '').trim();
+
+      var linhas = [];
+      linhas.push('Olá! Quero iniciar um pré-diagnóstico com a Faciamus.');
+      linhas.push('');
+      linhas.push('Nome: ' + nome);
+      if(empresa){ linhas.push('Empresa: ' + empresa); }
+      if(segmento){ linhas.push('Segmento: ' + segmento); }
+      if(tamanho){ linhas.push('Tamanho da empresa: ' + tamanho); }
+      linhas.push('Porta de interesse: ' + (porta || 'ainda não sei — quero ajuda para decidir'));
+      if(mensagem){ linhas.push('O que preciso: ' + mensagem); }
+      linhas.push('WhatsApp para contato: ' + telefone);
+
+      var texto = encodeURIComponent(linhas.join('\n'));
+      var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + texto;
+      window.open(url, '_blank');
+      closeModal();
+      form.reset();
+      setPorta('');
+    });
+  })();
+</script>
+
 </body>
 </html>
